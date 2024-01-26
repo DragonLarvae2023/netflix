@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        formClr: "rgba(5, 4, 4, 0.831);",
+        formClrLight: "rgba(5, 4, 4, 0.531);",
+      },
+    },
   },
   plugins: [],
 };
