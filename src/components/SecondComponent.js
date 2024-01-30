@@ -22,7 +22,7 @@ function MovieList({collection}){
   <div className="collections bg-transparent font-bold text-white relative z-50  my-10">
     <h1 className="mx-6">{collection.title}</h1>
 
-    <div className="flex overflow-scroll space-x-3">
+    <div className="flex  space-x-3">
       {collection.results.map((card)=><Card key={Card.id} Card={card}/>)}
     </div>
   </div>

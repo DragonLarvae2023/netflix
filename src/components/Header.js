@@ -6,11 +6,13 @@ import {useSelector,useDispatch} from "react-redux"
 import { useEffect } from "react";
 import {addUser,removeUser} from  "../slices/userSlices"
 import { useNavigate } from "react-router-dom";
+import {toggle} from "../slices/gptToggle"
 function Header() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
 const user=useSelector((state)=>state.user)
   function stateChanged(user) {
+
     if (user) {
       //sign in
 
@@ -24,7 +26,8 @@ const user=useSelector((state)=>state.user)
     }
   }
   useEffect(() => {
-    onAuthStateChanged(auth, stateChanged);
+const unsubscribe=    onAuthStateChanged(auth, stateChanged);
+return ()=>unsubscribe()
   }, []); 
   return (
     <>
@@ -32,12 +35,25 @@ const user=useSelector((state)=>state.user)
         <div className=" w-24 h-9   m-8 ">
           <LogoNetflix />
         </div>
+        {user&&
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-1/2 m-10" onClick={()=>{
+          dispatch(toggle())
+          console.log("clicked")
+        }}>
+          Search
+        </button>
+}
         <div className="flex m-4">
           <img className="block" alt="user profile" src="placeholder" />
-          <h1 className="font-bold block text-white ml-6" onClick={()=>{
-            const auth=getAuth()
-            signOut(auth).then().catch(err=>{})
-          }}>
+          <h1
+            className="font-bold block text-white ml-6"
+            onClick={() => {
+              const auth = getAuth();
+              signOut(auth)
+                .then()
+                .catch((err) => {});
+            }}
+          >
             {user ? "Sign out" : "Sign in"}
           </h1>
         </div>
@@ -45,4 +61,5 @@ const user=useSelector((state)=>state.user)
     </>
   );
 }
+
 export default Header

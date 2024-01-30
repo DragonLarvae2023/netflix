@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         formClr: "rgba(5, 4, 4, 0.831);",
+        searchBg: "rgba(5, 4, 4, 0.231);",
         formClrLight: "rgba(5, 4, 4, 0.531);",
       },
     },
